@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service
+  namespace: service-system
+spec:
+  template:
+    metadata:
+      labels:
+        app: service
+    spec:
+      containers:
+        - name: service-api
+          resources:
+            requests:
+              memory: '32Mi'
+              cpu: '150m'
+            limits:
+              memory: '128Mi'
+              cpu: '500m'

@@ -1,0 +1,20 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: go-svc-lab
+build:
+  artifacts:
+  - image: dev.local/service-amd64
+    context: zarf/docker
+    docker:
+      dockerfile: dockerfile
+deploy:
+  kustomize:
+    paths:
+    - zarf/k8s/base
+profiles:
+- name: service
+  deploy:
+    kustomize:
+      paths:
+      - zarf/k8s/base/service

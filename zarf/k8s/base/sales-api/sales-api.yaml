@@ -18,4 +18,4 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: service-api
-          image: dev.local/service-amd64:1.0
+          image: sales-api-image
