@@ -53,7 +53,15 @@ km-apply:
 kind-restart:
 	kubectl -n service-system rollout restart deployment
 
-kind-update: all kind-load kind-restart
+kind-update: all kind-load km-apply kind-restart
 
 logs:
 	stern service -n service-system
+
+
+# ==============================================================================
+# Module support
+
+tidy:
+	go mod tidy
+	go mod vendor
