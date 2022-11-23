@@ -23,5 +23,3 @@ LABEL org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.source="https://github.com/markhulia/service" \
     org.opencontainers.image.revision="${BUILD_REF}" \
     org.opencontainers.image.vendor="markhulia/go-svc"
-
-# docker exec -it ip-10-63-171-34.eu-west-1.compute.internal crictl images
