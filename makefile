@@ -48,7 +48,7 @@ kind-status:
 	kubectl get pods --watch -owide --service-system
 
 km-apply:
-	kustomize build zarf/k8s/base | kubectl apply -f -
+	kustomize build zarf/k8s/ | kubectl apply -f -
 
 kind-restart:
 	kubectl -n service-system rollout restart deployment
