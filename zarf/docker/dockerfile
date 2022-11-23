@@ -8,14 +8,15 @@ COPY . /service
 # Build the service binary
 WORKDIR /service
 
-RUN go build -ldflags "-X main.build=%{BUILD_REF}"
+RUN go build -ldflags "-X main.build=${BUILD_REF}"
 
 # Run the Go Binary in Alpine.
 FROM alpine:3.16
 ARG BUILD_DATE
 ARG BUILD_REF
-COPY --from=build_sales-api ./service /service/service
+COPY --from=build_sales-api /service/go-svc-lab /service/service
 WORKDIR /service
+
 CMD ["./service"]
 
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
@@ -24,3 +25,5 @@ LABEL org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.source="https://github.com/markhulia/service" \
     org.opencontainers.image.revision="${BUILD_REF}" \
     org.opencontainers.image.vendor="markhulia/go-svc"
+
+# docker exec -it ip-10-63-171-34.eu-west-1.compute.internal crictl images

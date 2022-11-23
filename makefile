@@ -25,7 +25,7 @@ service:
 # ==============================================================================
 # Kind cluster
 
-KIND_CLUSTER := golab-svc-api
+KIND_CLUSTER := kubeflow
 
 kind-up:
 	kind create cluster \
@@ -45,4 +45,15 @@ kind-status:
 	echo
 	kubectl get svc -o wide
 	echo
-	kubectl get pods --watch -owide --all-namespaces
+	kubectl get pods --watch -owide --service-system
+
+km-apply:
+	kustomize build zarf/k8s/base | kubectl apply -f -
+
+kind-restart:
+	kubectl -n service-system rollout restart deployment
+
+kind-update: all kind-load kind-restart
+
+logs:
+	stern service -n service-system
